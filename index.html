@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en-us">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>Unity WebGL Player | MagicSquare</title>
+  <link rel="stylesheet" href="TemplateData/style.css">
+  <link rel="shortcut icon" href="TemplateData/favicon.ico" />
+  <script src="TemplateData/UnityProgress.js"></script>
+  <script src="//vk.com/js/api/xd_connection.js?2" type="text/javascript"></script>
+  <script type="text/javascript">
+// Функция получения друзей и вывода их на экран
+function doIt(){
+        /*
+        VK.api('метод', {параметр: "значение"}, callback функция{
+        // работаем с полученными данными
+        });
+        */
+
+	VK.api("friends.get", {fields: "photo_medium"}, function(data) { 
+		// Действия с полученными данными 
+		for(c=0;c<data.response.length;c++){
+			$("body").append("<img src='"+data.response[c].photo_medium+"'>
+
+");
+		}
+	});
+}
+$(document).ready(function(){
+	doIt();
+});
+</script>
+</head>
+
+<body class="template">
+  <p class="header">MagicSquare</p>
+  <div class="template-wrap clear">
+    <canvas class="emscripten" id="canvas" oncontextmenu="event.preventDefault()" height="500px" width="500px"></canvas>
+    <br>
+    <div class="fullscreen"><img src="TemplateData/fullscreen.png" width="38" height="38" alt="Fullscreen" title="Fullscreen" onclick="SetFullscreen(1);"
+      /></div>
+    <div class="title">Magic Square</div>
+
+    <div id="vk_like"></div>
+    <div id="vk_comments"></div>
+  </div>
+  <script type="text/javascript">
+  var Module = {
+    TOTAL_MEMORY: 268435456,
+    errorhandler: null,			// arguments: err, url, line. This function must return 'true' if the error is handled, otherwise 'false'
+    compatibilitycheck: null,
+    dataUrl: "Release/WebGl.data",
+    codeUrl: "Release/WebGl.js",
+    memUrl: "Release/WebGl.mem",
+    
+  };
+</script>
+
+  <script type="text/javascript">
+VK.Widgets.Like("vk_like", {redesign: 1, type: "mini", height: 30});
+</script>
+  <script type="text/javascript" language="javascript">
+VK.Widgets.Comments('vk_comments', {limit: 10, width: '500', attach: '*', pageUrl: "http://vk.com/app5609100"});
+</script>
+  <script src="Release/UnityLoader.js"></script>
+
+
+
+</body>
+
+</html>
